@@ -102,6 +102,7 @@
     max-width: 600px; margin: 16px auto 4px; text-align: center;
     color: var(--ink); font-size: 16px; line-height: 1.8; font-weight: 600;
   }
+  .projects-note .m-br { display: none; }
 
   /* ---------- Ticket ---------- */
   .ticket {
@@ -129,6 +130,7 @@
   .ticket .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85em 1.1em; }
   .ticket .fields .k { font-size: 0.64em; letter-spacing: 0.16em; color: #9a938a; margin-bottom: 0.2em; }
   .ticket .fields .v { font-size: 1.07em; font-weight: 800; }
+  .ticket .ev-short { display: none; }
   .ticket .admit-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 1em; margin-top: auto; padding-top: 0.7em; border-top: 1px dashed rgba(0,0,0,0.15); }
   .ticket .mini-barcode {
     height: 1.9em; width: 6.9em;
@@ -282,6 +284,9 @@
   @media (max-width: 640px) {
     .hero .hero-course .sep { display: none; }
     .hero .hero-course .c1, .hero .hero-course .c2 { display: block; }
+    .ticket .ev-full { display: none; }
+    .ticket .ev-short { display: inline; }
+    .projects-note .m-br { display: inline; }
     .nav { padding: 12px 18px; }
     .nav-links { gap: 14px; }
     .nav-links a:not(.nav-cta) { display: none; }
@@ -330,7 +335,7 @@
     </div>
     <div class="body">
       <div class="fields">
-        <div class="f"><div class="k">EVENT</div><div class="v">최종 프로젝트 박람회</div></div>
+        <div class="f"><div class="k">EVENT</div><div class="v"><span class="ev-full">최종 프로젝트 박람회</span><span class="ev-short">최종 박람회</span></div></div>
         <div class="f"><div class="k">DATE</div><div class="v">JUL 22, 2026</div></div>
         <div class="f"><div class="k">TIME</div><div class="v">19:00 ~ 21:00</div></div>
         <div class="f"><div class="k">VENUE</div><div class="v">ZEP</div></div>
@@ -361,7 +366,7 @@
   <div class="section-head reveal">
     <span class="en">PROJECTS</span>
     <h2>전시 프로젝트</h2>
-    <p class="projects-note">Unreal 7기 대원들의 프로젝트를 소개합니다.<br>8개월간 최선을 다해 배우고 성장한 결과물을 한 자리에 모았습니다.</p>
+    <p class="projects-note">Unreal 7기 대원들의 프로젝트를 소개합니다.<br>8개월간 최선을 다해 배우고 성장한 결과물을<br class="m-br"> 한 자리에 모았습니다.</p>
     <p>이미지를 누르면 팀별 브로셔 페이지로 이동합니다.</p>
   </div>
   <div class="grid" id="project-grid"></div>
