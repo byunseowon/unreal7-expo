@@ -246,6 +246,35 @@
   /* ---------- Footer ---------- */
   footer { text-align: center; padding: 40px 28px 52px; color: var(--ink-soft); font-size: 12px; line-height: 1.7; border-top: 1px solid var(--line); }
 
+  /* ---------- Animations ---------- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(.2,.6,.2,1), transform 0.7s cubic-bezier(.2,.6,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .steps .step:nth-child(2) { transition-delay: 0.08s; }
+  .steps .step:nth-child(3) { transition-delay: 0.16s; }
+  .steps .step:nth-child(4) { transition-delay: 0.24s; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  .hero > * { opacity: 0; animation: fadeUp 0.8s cubic-bezier(.2,.6,.2,1) forwards; }
+  .hero > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero > *:nth-child(4) { animation-delay: 0.35s; }
+  .hero > *:nth-child(5) { animation-delay: 0.45s; }
+  .hero > *:nth-child(6) { animation-delay: 0.55s; }
+  @keyframes fadeUpTicket { from { opacity: 0; transform: translateY(26px) rotate(-3deg); } to { opacity: 1; transform: rotate(-3deg); } }
+  .hero .ticket { animation-name: fadeUpTicket; }
+
+  @keyframes badgePulse { 0%, 100% { box-shadow: 0 0 7px var(--accent); } 50% { box-shadow: 0 0 15px var(--accent); } }
+  .hero .badge.live::before { animation: badgePulse 1.8s ease-in-out infinite; }
+
+  .card, .step, .booth-node .diamond, .btn-outline, .cta { will-change: transform; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero > * { opacity: 1; animation: none; }
+    .hero .badge.live::before { animation: none; }
+  }
+
   /* ---------- Mobile ---------- */
   @media (max-width: 780px) {
     .steps { grid-template-columns: repeat(2, 1fr); }
@@ -320,16 +349,16 @@
 </header>
 
 <section class="block" id="boothmap">
-  <div class="section-head">
+  <div class="section-head reveal">
     <span class="en">BOOTH MAP</span>
     <h2>부스 배치도</h2>
     <p>부스를 누르면 해당 조 브로셔 페이지로 이동합니다</p>
   </div>
-  <div class="map-wrap"><div class="booth-map" id="booth-map"></div></div>
+  <div class="map-wrap reveal"><div class="booth-map" id="booth-map"></div></div>
 </section>
 
 <section class="block" id="projects">
-  <div class="section-head">
+  <div class="section-head reveal">
     <span class="en">PROJECTS</span>
     <h2>전시 프로젝트</h2>
     <p class="projects-note">Unreal 7기 대원들의 프로젝트를 소개합니다.<br>8개월간 최선을 다해 배우고 성장한 결과물을 한 자리에 모았습니다.</p>
@@ -340,61 +369,61 @@
 
 <section class="block" id="guide">
   <div class="guide-inner">
-    <div class="guide-icon">🎫</div>
-    <div class="section-head">
+    <div class="guide-icon reveal">🎫</div>
+    <div class="section-head reveal">
       <h2>관람 안내</h2>
       <p>쾌적한 박람회 관람을 위해 안내드립니다</p>
     </div>
     <div class="steps">
-      <div class="step">
+      <div class="step reveal">
         <div class="no">STEP 01</div>
         <div class="ic">🔗</div>
         <h3>ZEP 링크 접속</h3>
         <p>공유된 ZEP 링크를 클릭하면<br>웹 브라우저에서 바로 열려요.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="no">STEP 02</div>
         <div class="ic">✏️</div>
         <h3>닉네임 입력</h3>
         <p>간단한 닉네임을 입력하고<br>입장하기를 눌러주세요.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="no">STEP 03</div>
         <div class="ic">🧭</div>
         <h3>박람회장 이동</h3>
         <p>처음 스폰 맵은 박람회장이 아니에요!<br><b>중앙 박람회장 문</b>으로 들어와 주세요.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="no">STEP 04</div>
         <div class="ic">🚶</div>
         <h3>자유 관람</h3>
         <p>각 팀 부스를 돌아다니며<br>프로젝트를 자유롭게 관람하세요.</p>
       </div>
     </div>
-    <div class="warn">
+    <div class="warn reveal">
       <span class="big">⚠️</span>
       <div><b>잠깐!</b> ZEP에 처음 접속하면 스폰되는 맵은 박람회장이 아니에요.<br>
       반드시 <b>중앙 박람회장 문</b>으로 들어와 박람회장에 입장해 주세요.</div>
     </div>
-    <div class="guide-cta">
+    <div class="guide-cta reveal">
       <a class="cta" href="https://zep.us/play/kP1bRX" id="zep-btn2" target="_blank" rel="noopener">🚀 ZEP 입장하기</a>
     </div>
   </div>
 </section>
 
 <section class="block" id="about">
-  <div class="section-head">
+  <div class="section-head reveal">
     <span class="en">ABOUT</span>
     <h2>내일배움캠프 소개</h2>
   </div>
-  <div class="video-wrap">
+  <div class="video-wrap reveal">
     <iframe
       src="https://www.youtube.com/embed/6G8GLrBt_zI"
       title="내일배움캠프 소개 영상"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen></iframe>
   </div>
-  <div class="about-cta">
+  <div class="about-cta reveal">
     <a class="btn-outline" href="https://nbcamp.spartacodingclub.kr/" target="_blank" rel="noopener">내일배움캠프 홈페이지 →</a>
   </div>
 </section>
@@ -417,9 +446,9 @@
 
   // ---- 전시 프로젝트 카드 ----
   const grid = document.getElementById('project-grid');
-  TEAMS.forEach(p => {
+  TEAMS.forEach((p, i) => {
     const a = document.createElement('a');
-    a.className = 'card';
+    a.className = 'card reveal';
     a.href = p.notionUrl; a.target = '_blank'; a.rel = 'noopener';
     const isVideo = /\.mp4$/i.test(p.image);
     const thumb = isVideo
@@ -484,6 +513,19 @@
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', zepGate);
   });
+
+  // ---- 스크롤 등장 애니메이션 ----
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
 </script>
 
 </body>
