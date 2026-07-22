@@ -152,6 +152,10 @@
     box-shadow: 0 10px 26px rgba(230, 54, 47, 0.32); transition: transform 0.15s, background 0.15s;
   }
   .cta:hover { background: var(--accent-deep); transform: translateY(-2px); }
+  .cta.is-closed, .nav-cta.is-closed {
+    background: #3a3a42; color: var(--ink-soft); box-shadow: none; cursor: not-allowed;
+  }
+  .cta.is-closed:hover, .nav-cta.is-closed:hover { background: #3a3a42; transform: none; }
 
   /* ---------- Section common ---------- */
   section.block { padding: 84px 28px; max-width: 1120px; margin: 0 auto; }
@@ -495,28 +499,36 @@
   buildBranch(LEFT_ARM, -1);
   buildBranch(RIGHT_ARM, 1);
 
-  // ---- ZEP 입장 시간 제한 (7월 22일 19:00 KST 이전에는 안내) ----
+  // ---- ZEP 입장 상태 (시작 19:00 ~ 종료 21:00, 7월 22일 KST) ----
   const EVENT_START = new Date('2026-07-22T19:00:00+09:00');
+  const EVENT_END = new Date('2026-07-22T21:00:00+09:00');
+  const NOW = new Date();
+  const isBefore = NOW < EVENT_START;
+  const isLive = NOW >= EVENT_START && NOW < EVENT_END;
+  const isClosed = NOW >= EVENT_END;
 
-  // ---- 히어로 배지: 시작 시각 기준으로 상태 표시 ----
+  // 히어로 배지
   const badge = document.getElementById('hero-badge');
   if (badge) {
-    if (new Date() >= EVENT_START) {
-      badge.textContent = 'NOW SHOWING · 2026.07.22';
-      badge.classList.add('live');
-    } else {
-      badge.textContent = 'COMING SOON · 07.22 19:00';
-    }
+    if (isLive) { badge.textContent = 'NOW SHOWING · 2026.07.22'; badge.classList.add('live'); }
+    else if (isClosed) { badge.textContent = '박람회 종료 · 2026.07.22'; }
+    else { badge.textContent = 'COMING SOON · 07.22 19:00'; }
   }
-  function zepGate(e) {
-    if (new Date() < EVENT_START) {
-      e.preventDefault();
-      alert('아직 박람회 시간이 아니에요.\n7월 22일 19:00부터 입장하실 수 있습니다.');
+
+  // ZEP 입장 버튼 3개
+  const zepBtns = ['zep-btn', 'zep-btn2', 'nav-zep'].map(id => document.getElementById(id)).filter(Boolean);
+  zepBtns.forEach(el => {
+    const isNav = el.id === 'nav-zep';
+    if (isClosed) {
+      el.classList.add('is-closed');
+      el.textContent = isNav ? '종료' : '박람회가 종료되었습니다';
+      el.addEventListener('click', e => e.preventDefault());
+    } else if (isBefore) {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        alert('아직 박람회 시간이 아니에요.\n7월 22일 19:00부터 입장하실 수 있습니다.');
+      });
     }
-  }
-  ['zep-btn', 'zep-btn2', 'nav-zep'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', zepGate);
   });
 
   // ---- 스크롤 등장 애니메이션 ----
